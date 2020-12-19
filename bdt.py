@@ -24,7 +24,12 @@ class BigDataTools():
 
 
     def dsinfo(self):
-        return ["./assets/tlc_0.2perc/" + file for file in os.listdir("./assets/tlc_0.2perc/")]
+        csvPaths =  ["./assets/tlc_0.2perc/" + file for file in os.listdir("./assets/tlc_0.2perc/")]
+        aux = {}
+        for file in csvPaths:
+            aux.setdefault(file[:file.find("_")], [])
+            aux[file[:file.find("_")]].append(file)
+        return aux
 
     def getHeaders(self, opt):
         return self.loadCSV(self.dsinfo()[opt])
