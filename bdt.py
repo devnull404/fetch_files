@@ -30,8 +30,10 @@ class tools():
             file = file[21:]
             if file[0] != ".":
                 aux.setdefault(file[:file.find("_")], [])
-                aux[file[:file.find("_")]].append(file)
+                aux[file[:file.find("_")]].append("./assets/tlc_0.2perc/" + file)
         return aux
 
-    def getHeaders(self, opt):
-        return self.loadCSV(self.dsinfo()[opt])
+    def getHeaders(self, fileStructure):
+        for file in fileStructure:
+            print(self.loadCSV(file))
+        return 1
