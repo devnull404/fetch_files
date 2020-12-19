@@ -3,7 +3,7 @@ import os
 import json
 import pprint
 
-class BigDataTools():
+class tools():
     def __init__(self, a, b):
         self.a = a
         self.b = b
@@ -12,7 +12,7 @@ class BigDataTools():
         if ".json" not in targetFile:
             targetFile += ".json"
         with open(targetFile, "w+") as fp:
-            json.dumps(variable, fp)
+            json.dump(variable, fp)
 
     def loadCSV(self, fileName):
         with open(fileName, 'r') as fp:
@@ -27,8 +27,10 @@ class BigDataTools():
         csvPaths =  ["./assets/tlc_0.2perc/" + file for file in os.listdir("./assets/tlc_0.2perc/")]
         aux = {}
         for file in csvPaths:
-            aux.setdefault(file[:file.find("_")], [])
-            aux[file[:file.find("_")]].append(file)
+            file = file[21:]
+            if file[0] != ".":
+                aux.setdefault(file[:file.find("_")], [])
+                aux[file[:file.find("_")]].append(file)
         return aux
 
     def getHeaders(self, opt):
