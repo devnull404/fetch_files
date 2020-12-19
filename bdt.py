@@ -17,4 +17,14 @@ class BigDataTools():
     def loadCSV(self, fileName):
         with open(fileName, 'r') as fp:
             csvFile = csv.reader(fp)
-        return csvFile
+            for row in csvFile:
+                aux = row
+                break
+        return aux
+
+
+    def dsinfo(self):
+        return ["./assets/tlc_0.2perc/" + file for file in os.listdir("./assets/tlc_0.2perc/")]
+
+    def getHeaders(self, opt):
+        return self.loadCSV(self.dsinfo()[opt])
