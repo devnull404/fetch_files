@@ -4,9 +4,9 @@ import json
 import pprint
 
 class tools(object):
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+    def __init__(self):
+        self.ABS_PATH_WINDOWS = 'C:\\project\\tlc_0.2perc\\'
+        self.REL_PATD_UNIX = "./assets/tlc_0.2perc/"
 
     def saveJson(self, targetFile, variable):
         if ".json" not in targetFile:
@@ -27,13 +27,13 @@ class tools(object):
 
 
     def dsinfo(self):
-        csvPaths =  ["./assets/tlc_0.2perc/" + file for file in os.listdir("./assets/tlc_0.2perc/")]
+        csvPaths =  [self.ABS_PATH_WINDOWS + file for file in os.listdir(self.ABS_PATH_WINDOWS)]
         aux = {}
         for file in csvPaths:
             file = file[21:]
             if file[0] != ".":
                 aux.setdefault(file[:file.find("_")], [])
-                aux[file[:file.find("_")]].append("./assets/tlc_0.2perc/" + file)
+                aux[file[:file.find("_")]].append(self.ABS_PATH_WINDOWS + file)
         return aux
 
     def getHeaders(self, fileStructure):
