@@ -3,7 +3,7 @@ import os
 import json
 import pprint
 
-class tools():
+class tools(object):
     def __init__(self, a, b):
         self.a = a
         self.b = b
