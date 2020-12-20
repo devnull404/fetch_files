@@ -15,12 +15,15 @@ class tools():
             json.dump(variable, fp)
 
     def loadCSV(self, fileName):
+        count = 0
         with open(fileName, 'r') as fp:
             csvFile = csv.reader(fp)
             for row in csvFile:
                 aux = row
                 break
-        return aux
+            for row in csvFile:
+                count += 1
+        return aux, count
 
 
     def dsinfo(self):
@@ -37,3 +40,14 @@ class tools():
         for file in fileStructure:
             print(self.loadCSV(file))
         return 1
+
+    def getStats(self):
+        datasetinfo = self.dsinfo()
+        aux = []
+        i = 0
+        for subset in datasetinfo.keys():
+            aux.append([])
+            for elem in datasetinfo[subset]:
+                aux[i].append(self.loadCSV(elem))
+            i += 1
+        return aux
