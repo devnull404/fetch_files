@@ -48,6 +48,6 @@ class tools(object):
         for subset in datasetinfo.keys():
             aux.append([])
             for elem in datasetinfo[subset]:
-                aux[i].append(self.loadCSV(elem))
+                aux[i].append(self.loadCSV(elem)[3:])
             i += 1
         return aux
