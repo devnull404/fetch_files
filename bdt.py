@@ -5,7 +5,7 @@ import pprint
 
 class tools(object):
     def __init__(self):
-        self.ABS_PATH_WINDOWS = 'C:\\project\\tlc_0.2perc\\'
+        self.ABS_PATH_WINDOWS = "./assets/tlc_0.2perc/"
         self.REL_PATD_UNIX = "./assets/tlc_0.2perc/"
 
     def saveJson(self, targetFile, variable):
@@ -21,8 +21,7 @@ class tools(object):
             for row in csvFile:
                 aux = row
                 break
-            for row in csvFile:
-                count += 1
+            count = sum(1 for row in csvFile)
         return aux, count
 
 
@@ -42,12 +41,22 @@ class tools(object):
         return 1
 
     def getStats(self):
+        aux = {}
         datasetinfo = self.dsinfo()
-        aux = []
+        count = 0
         i = 0
-        for subset in datasetinfo.keys():
-            aux.append([])
-            for elem in datasetinfo[subset]:
-                aux[i].append(self.loadCSV(elem[3:]))
-            i += 1
+        for category in datasetinfo.keys():
+            aux.setdefault(category, [])
+            for elem in datasetinfo[category]:
+                aux[category].append({})
+                aux[category][-1][elem] = []
+                out = self.loadCSV(elem)
+                aux[category][-1][elem].append(out[0])
+                aux[category][-1][elem].append(out[1])
+                count += out[1]
+                i += 1
+            count = count/i
+            aux[category].append(count)
+            count = 0
+            i = 0
         return aux
