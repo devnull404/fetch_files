@@ -14,6 +14,22 @@ class tools(object):
         with open(targetFile, "w+") as fp:
             json.dump(variable, fp)
 
+    def loadJson(self):
+        jfile = [file for file in os.listdir() if ".json" in file]
+        index = list(range(len(jfile)))
+        print("Select a file to return as a variable: ")
+        for i in range(len(jfile)):
+            print(str(index[i]+1) + " - " + jfile[i])
+        flag = True
+        while flag:
+            aux = input(">>> ? ")
+            if (int(aux)-1) in index:
+                flag = False
+        with open(jfile[int(aux)-1], "r") as fp:
+            var = json.load(fp)
+        
+        return var
+
     def loadCSV(self, fileName):
         count = 0
         with open(fileName, 'r') as fp:
@@ -60,3 +76,6 @@ class tools(object):
             count = 0
             i = 0
         return aux
+
+        def patternIDentification(self, structuredData):
+            
