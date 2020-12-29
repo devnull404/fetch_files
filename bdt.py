@@ -77,5 +77,11 @@ class tools(object):
             i = 0
         return aux
 
-        def patternIDentification(self, structuredData):
-            
+    def patternIDentification(self, structuredData):
+        for element in structuredData:
+            for header in range(len(structuredData[element])-2):
+                aux1 = [piece.lower() for piece in list(structuredData[element][header].values())[0][0]]
+                aux2 = [piece.lower() for piece in list(structuredData[element][header+1].values())[0][0]]
+                out = aux1 == aux2
+                print(str(header+1) + "-"+ element +" --- "+ str(out))
+        return 1
